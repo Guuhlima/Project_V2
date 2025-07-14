@@ -1,0 +1,97 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["multiSchema"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  schemas  = ["winover"]
+}
+
+model Funcionario {
+  id                             Int      @id @default(autoincrement())
+  matricula                      Int
+  nome                           String
+  login                          String
+  cpf                            String?  @db.VarChar
+  pis                            String?  @db.VarChar
+  hash                           String?  @db.VarChar
+  ativo                          Int
+  matricula_supervisor           Int      @map("matricula_supervisor")
+  dia_nao_trabalhado             Boolean  @map("dia_nao_trabalhado")
+  id_campanha                    Int      @map("id_campanha")
+  agentid                        String
+  agentid_aspect                 String   @map("agentid_aspect")
+  id_tipo_discador               Int?     @map("id_tipo_discador")
+  ramal                          Int
+  data_admissao                  DateTime? @map("data_admissao")
+  senha_aspect                   String?  @map("senha_aspect")
+  id_cargo                       Int?     @map("id_cargo")
+  foto                           String?
+  primeiro_acesso                Int      @map("primeiro_acesso")
+  data_nascimento                DateTime @map("data_nascimento")
+  ativa_desktop                  Boolean? @map("ativa_desktop")
+  tipo_intervalo                 Int?     @map("tipo_intervalo")
+  jornada_semanal                Int      @map("jornada_semanal")
+  tipo_escala                    Int      @map("tipo_escala")
+  aprovador_HE                   Boolean? @map("aprovador_he")
+  apovador_escalas_excepcionais Boolean? @map("apovador_escalas_excepcionais")
+  id_centro_custo                Int?     @map("id_centro_custo")
+  telefone                       String
+  quartil                        String?
+  data_atualiz_tel               DateTime @map("data_atualiz_tel")
+  data_atualiz_senha             DateTime? @map("data_atualiz_senha")
+  desc_horario                   String?  @map("desc_horario")
+  p1_inicio                      String?  @map("p1_inicio")
+  p2_inicio                      String?  @map("p2_inicio")
+  p3_inicio                      String?  @map("p3_inicio")
+  p1_fim                         String?  @map("p1_fim")
+  p2_fim                         String?  @map("p2_fim")
+  p3_fim                         String?  @map("p3_fim")
+  intervalo_inicio               String?  @map("intervalo_inicio")
+  intervalo_fim                  String?  @map("intervalo_fim")
+  hora_entrada                   String?  @map("hora_entrada")
+  hora_saida                     String?  @map("hora_saida")
+  senha                          String?
+  empresa                        String?
+  ult_atualizacao                DateTime? @map("ult_atualizacao")
+  login_santander                String?  @map("login_santander")
+  id_operacao_santander          Int?     @map("id_operacao_santander")
+  segmento_santander             String?  @map("segmento_santander")
+  escala_inicia_em_semana_par   Boolean   @map("escala_inicia_em_semana_par")
+  versao                         String
+
+  @@map("Funcionario")
+  @@schema("winover")
+}
+
+model EntradaSaida {
+  id           Int      @id @default(autoincrement())
+  matricula    Int
+  id_campanha  Int
+  entrada      DateTime
+  saida        DateTime?
+  status       Int
+
+  @@map("entrada_saida")
+  @@schema("winover")
+}
+
+model Pausas {
+  id                Int      @id @default(autoincrement())
+  pausa             String
+  descricao         String
+  tempo             Float
+  trava             Int
+  id_olus           Int
+  id_pausa_olos     Int
+  id_pausa_aspect   Int
+  grava_afd         Int
+  tipo              Int
+  trava_sistema     Int
+  fixo_variavel     Int
+
+  @@map("pausas")
+  @@schema("winover")
+}
