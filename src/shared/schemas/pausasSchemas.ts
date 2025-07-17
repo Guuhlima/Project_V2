@@ -5,7 +5,9 @@ export const PausasParamsSchema = Type.Object({
 })
 
 export const PausasBodySchema = Type.Object({
-    
+    matricula: Type.Number(),
+    id_campanha: Type.Number(),
+    id_tipo_pausa: Type.Number()
 })
 
 export type PausasBody = Static<typeof PausasParamsSchema> 

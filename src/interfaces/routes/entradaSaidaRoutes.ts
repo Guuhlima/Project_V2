@@ -14,7 +14,7 @@ import { FinalizarEntradaUseCase } from "../../application/use-cases/entradaSaid
 import { ConsultarEntradaUseCase } from "../../application/use-cases/entradaSaida/consultarEntrada.usecase";
 import { AtualizarStatusPorIdUseCase } from "../../application/use-cases/entradaSaida/atualizarStatusPorId.usecase";
 import { PrismaEntradaSaidaRepository } from "../../infrastructure/repositories/prismaEntradaSaidaRepository";
-import { EntradaSaidaController } from "../http/controllers/entradaSaidaController";
+import { EntradaSaidaController } from "../http/controllers/entradaSaida.controller";
 
 export async function entradaSaidaRoutes(app: FastifyInstance) {
   const repo = new PrismaEntradaSaidaRepository();

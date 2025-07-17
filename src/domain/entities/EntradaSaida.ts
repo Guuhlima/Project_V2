@@ -1,5 +1,5 @@
 export interface EntradaSaida {
-  id: number;
+  id?: number;
   matricula: number;
   id_campanha: number;
   entrada: Date;

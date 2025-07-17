@@ -6,7 +6,7 @@ export interface PausasOutputDTO {
     pausas: {
         id: number,
         pausa: string,
-        trava: string,
+        trava: number,
         tempo: number,
         id_olus: number,
         id_pausa_olos: number,

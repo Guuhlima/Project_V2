@@ -1,5 +1,5 @@
 import { FuncionarioRepository } from "../../../domain/repositories/funcionarioRepository";
-import { ConsultarFuncionarioInputDTO, FuncionarioOutputDTO } from "../../dtos/funcionarios/consultarFuncionarioDTO";
+import { ConsultarFuncionarioInputDTO, FuncionarioOutputDTO } from "../../dtos/funcionarios/consultarFuncionario.dto";
 
 export class ConsultarFuncionarioUseCase {
     constructor(private repo: FuncionarioRepository) {}

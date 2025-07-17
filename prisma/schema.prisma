@@ -36,7 +36,7 @@ model Funcionario {
   jornada_semanal                Int      @map("jornada_semanal")
   tipo_escala                    Int      @map("tipo_escala")
   aprovador_HE                   Boolean? @map("aprovador_he")
-  apovador_escalas_excepcionais Boolean? @map("apovador_escalas_excepcionais")
+  apovador_escalas_excepcionais  Boolean? @map("apovador_escalas_excepcionais")
   id_centro_custo                Int?     @map("id_centro_custo")
   telefone                       String
   quartil                        String?
@@ -59,8 +59,9 @@ model Funcionario {
   login_santander                String?  @map("login_santander")
   id_operacao_santander          Int?     @map("id_operacao_santander")
   segmento_santander             String?  @map("segmento_santander")
-  escala_inicia_em_semana_par   Boolean   @map("escala_inicia_em_semana_par")
+  escala_inicia_em_semana_par    Boolean   @map("escala_inicia_em_semana_par")
   versao                         String
+  escalas                        FuncionarioEscala[]
 
   @@map("Funcionario")
   @@schema("winover")
@@ -93,5 +94,23 @@ model Pausas {
   fixo_variavel     Int
 
   @@map("pausas")
+  @@schema("winover")
+}
+
+model FuncionarioEscala {
+  id_funcionario Int         @id
+  funcionario    Funcionario @relation(fields: [id_funcionario], references: [id])
+  dia_semana     Int
+  tipo_escala    Int
+  ini_expediente String
+  ini_intervalo  String
+  fim_intervalo  String
+  ini_pausa1     String
+  fim_pausa1     String
+  ini_pausa2     String
+  fim_pausa2     String
+  fim_expediente String
+
+  @@map("FuncionarioEscala")
   @@schema("winover")
 }
