@@ -1,23 +1,12 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { ConsultarFuncionarioEscalaUseCase } from "../../../application/use-cases/funcionarioEscala/consultarFuncionarioEscala.usecase";
-import { AdicionarFuncionarioEscalaUseCase } from "../../../application/use-cases/funcionarioEscala/adicionarFuncionarioEscala.usecase";
-import { FuncionarioEscalaBody, FuncionarioEscalaParams, FuncionarioEscalaAdicionarParams } from "../../../shared/schemas/funcionarioEscalasSchemas";
+import { ConsultarFuncionarioEscalaUseCase } from "../../../../application/use-cases/funcionarioEscala/consultarFuncionarioEscala.usecase";
+import { AdicionarFuncionarioEscalaUseCase } from "../../../../application/use-cases/funcionarioEscala/adicionarFuncionarioEscala.usecase";
+import { FuncionarioEscalaBody, FuncionarioEscalaParams, FuncionarioEscalaAdicionarParams } from "../../../../shared/schemas/funcionarioEscalasSchemas";
 
-export class FuncionarioEscalaController {
+export class AdicionarFuncionarioEscalaController {
     constructor(
-        private readonly consultarEscala: ConsultarFuncionarioEscalaUseCase,
         private readonly adicionarEscala: AdicionarFuncionarioEscalaUseCase
     ) {}
-
-    async consultarFuncionarioEscala(request: FastifyRequest<{ Params: FuncionarioEscalaParams}>, reply: FastifyReply) {
-        try {
-            const { id_funcionario, dia_semana } = request.params;
-            const result = await this.consultarEscala.execute({ id_funcionario, dia_semana });
-            return reply.send(result)
-        } catch (error) {
-            return reply.status(500).send({ message: "Erro ao consultar escala", error})
-        }
-    } 
 
     async adicionarFuncionarioEscala(request: FastifyRequest<{ Params: FuncionarioEscalaAdicionarParams , Body: FuncionarioEscalaBody}>, reply: FastifyReply) {
         try {

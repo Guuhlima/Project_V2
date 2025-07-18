@@ -1,8 +1,8 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { FuncionarioBody, FuncionarioParams } from "../../../shared/schemas/funcionarioSchemas";
-import { PrismaFuncionarioRepository } from "../../../infrastructure/repositories/prismaFuncionarioRepository";
-import logger from "../../../shared/schemas/logger";
-import { ConsultarFuncionarioUseCase } from "../../../application/use-cases/funcionarios/consultarFuncionario.usecase";
+import { FuncionarioBody, FuncionarioParams } from "../../../../shared/schemas/funcionarioSchemas";
+import { PrismaFuncionarioRepository } from "../../../../infrastructure/repositories/prismaFuncionarioRepository";
+import logger from "../../../../shared/schemas/logger";
+import { ConsultarFuncionarioUseCase } from "../../../../application/use-cases/funcionarios/consultarFuncionario.usecase";
 
 export async function ConsultarFuncionariosController(
     requet: FastifyRequest<{Params: FuncionarioParams, Body: FuncionarioBody}>,

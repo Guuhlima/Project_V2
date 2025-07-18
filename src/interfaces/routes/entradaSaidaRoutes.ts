@@ -14,46 +14,60 @@ import { FinalizarEntradaUseCase } from "../../application/use-cases/entradaSaid
 import { ConsultarEntradaUseCase } from "../../application/use-cases/entradaSaida/consultarEntrada.usecase";
 import { AtualizarStatusPorIdUseCase } from "../../application/use-cases/entradaSaida/atualizarStatusPorId.usecase";
 import { PrismaEntradaSaidaRepository } from "../../infrastructure/repositories/prismaEntradaSaidaRepository";
-import { EntradaSaidaController } from "../http/controllers/entradaSaida.controller";
+import { LogarEntradaController } from "../http/controllers/entradaSaidaController/logarEntradaSaida.controller";
+import { FinalizarEntradaController } from "../http/controllers/entradaSaidaController/finalizarEntradaSaida.controller";
+import { AtualizarEntradaSaidaController } from "../http/controllers/entradaSaidaController/atualizarEntradaSaida.controller";
+import { AtualizarPorIdController } from "../http/controllers/entradaSaidaController/atualizarPorIdEntradaSaida.controller";
+import { ConsultarEntradaSaidaController } from "../http/controllers/entradaSaidaController/consultarEntradaSaida.controller";
 
 export async function entradaSaidaRoutes(app: FastifyInstance) {
   const repo = new PrismaEntradaSaidaRepository();
 
-  const controller = new EntradaSaidaController(
-    new LogarEntradaUseCase(repo),
-    new FinalizarEntradaUseCase(repo),
-    new ConsultarEntradaUseCase(repo),
-    new AtualizarStatusUseCase(repo),
-    new AtualizarStatusPorIdUseCase(repo)
-  );
+  const consultarEntradaSaidaController = new ConsultarEntradaSaidaController (
+    new ConsultarEntradaUseCase(repo)
+  )
 
-  app.post('/wocc/entradasaida/logar', {
+  const logarEntradaSaidaController = new LogarEntradaController (
+    new LogarEntradaUseCase(repo)
+  )
+
+  const finalizarEntradaController = new FinalizarEntradaController (
+    new FinalizarEntradaUseCase(repo)
+  )
+
+  const atualizarEntradaSaida = new AtualizarEntradaSaidaController (
+    new AtualizarStatusUseCase(repo)
+  )
+
+  const atualizarPorIdEntradaSaida = new AtualizarPorIdController (
+    new AtualizarStatusPorIdUseCase(repo)
+  )
+
+  app.post("/wocc/entradasaida/logar", {
     schema: {
       body: LogarEntradaBodySchema,
-      response: {
-        200: EntradaSaidaResponseSchema
-      }
-    }
-  }, controller.logar.bind(controller));
-
+      response: { 200: EntradaSaidaResponseSchema }
+    },
+  }, logarEntradaSaidaController.logar);
+  
   app.post('/wocc/entradasaida/finalizar', {
     schema: {
       body: FinalizarEntradaBodySchema
     }
-  }, controller.finalizar.bind(controller));
+  }, finalizarEntradaController.finalizar.bind(finalizarEntradaController));
 
   app.patch('/wocc/entradasaida/atualizar', {
     schema: {
       body: AtualizarEntradaBodySchema
     }
-  }, controller.atualizar.bind(controller));
+  }, atualizarEntradaSaida.atualizar.bind(atualizarEntradaSaida));
 
   app.patch('/wocc/entradasaida/atualizar/:id', {
     schema: {
       params: AtualizarPorIdParamsSchema,
       body: AtualizarEntradaBodySchema
     }
-  }, controller.atualizarPorId.bind(controller));
+  }, atualizarPorIdEntradaSaida.atualizarPorId.bind(atualizarPorIdEntradaSaida));
 
   app.get('/wocc/entradasaida/consultar/:matricula', {
     schema: {
@@ -62,5 +76,5 @@ export async function entradaSaidaRoutes(app: FastifyInstance) {
         200: EntradaSaidaResponseSchema
       }
     }
-  }, controller.consultar.bind(controller));
+  }, consultarEntradaSaidaController.consultar.bind(consultarEntradaSaidaController));
 }
