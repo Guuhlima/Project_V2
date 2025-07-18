@@ -1,5 +1,5 @@
 import { FuncionarioEscalaRepository } from "../../../domain/repositories/funcionarioEscalaRepository";
-import { FuncionarioEscalaInput, BaseOutputDTO } from "../../dtos/funcionarioEscala/funcionarioEscalaDTO";
+import { FuncionarioEscalaInput, BaseOutputDTO } from "../../dtos/funcionarioEscala/funcionarioEscala.dto";
 import { NotFoundError } from "../../../shared/errors/NotFoundError";
 
 export class AtualizarFuncionarioEscalaUseCase {

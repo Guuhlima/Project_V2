@@ -1,11 +1,12 @@
 import { FuncionarioEscalaRepository } from "../../../domain/repositories/funcionarioEscalaRepository";
-import { FuncionarioEscalaInput, FuncionarioEscalaOutput } from "../../dtos/funcionarioEscala/funcionarioEscalaDTO";
+import { FuncionarioEscalaOutput } from "../../dtos/funcionarioEscala/funcionarioEscala.dto";
+import { ConsultarFuncionarioEscalaInput } from "../../dtos/funcionarioEscala/consultarFuncionarioEscala.dto"
 import { NotFoundError } from "../../../shared/errors/NotFoundError";
 
 export class ConsultarFuncionarioEscalaUseCase {
     constructor(private repo: FuncionarioEscalaRepository) {}
 
-    async execute(input: FuncionarioEscalaInput): Promise<FuncionarioEscalaOutput> {
+    async execute(input: ConsultarFuncionarioEscalaInput): Promise<FuncionarioEscalaOutput> {
         const { id_funcionario, dia_semana } = input;
 
         const escala = await this.repo.consultarEscala(id_funcionario, dia_semana);

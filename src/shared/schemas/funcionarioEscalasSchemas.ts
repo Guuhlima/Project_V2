@@ -3,11 +3,6 @@ import { Type, Static } from "@sinclair/typebox";
 export const FuncionarioEscalaBodySchema = Type.Object ({
     id_funcionario: Type.Number(),
     dia_semana: Type.Number(),
-})
-
-export const FuncionarioEscalaParamsSchema = Type.Object ({
-    id_funcionario: Type.Number(),
-    dia_semana: Type.Number(),
     tipo_escala: Type.Number(),
     ini_expediente: Type.String(),
     ini_intervalo: Type.String(),
@@ -19,5 +14,15 @@ export const FuncionarioEscalaParamsSchema = Type.Object ({
     fim_expediente: Type.String(),
 })
 
+export const FuncionarioEscalaParamsSchema = Type.Object ({
+    id_funcionario: Type.Number(),
+    dia_semana: Type.Number(),
+})
+
+export const FuncionarioEscalaAdicionarSchema = Type.Object ({
+    id_funcionario: Type.Number(),
+})
+
 export type FuncionarioEscalaBody = Static<typeof FuncionarioEscalaBodySchema>;
 export type FuncionarioEscalaParams = Static<typeof FuncionarioEscalaParamsSchema>;
+export type FuncionarioEscalaAdicionarParams = Static<typeof FuncionarioEscalaAdicionarSchema>

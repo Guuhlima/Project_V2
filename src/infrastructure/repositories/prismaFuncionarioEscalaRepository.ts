@@ -1,12 +1,13 @@
 import { prisma } from "../db/prisma";
 import { FuncionarioEscalaRepository } from "../../domain/repositories/funcionarioEscalaRepository";
+import { CriarFuncionarioEscalaInputDTO } from "../../application/dtos/funcionarioEscala/consultarFuncionarioEscala.dto"
 import { FuncionarioEscala } from "../../domain/entities/FuncionarioEscala";
 
 export class PrismaFuncionarioEscalaRepository implements FuncionarioEscalaRepository {
     async consultarEscala(id_funcionario: number, dia_semana: number): Promise<FuncionarioEscala> {
         const escala = await prisma.funcionarioEscala.findFirst({
             where: { id_funcionario, dia_semana },
-            orderBy: { tipo_escala: 'desc' }
+            orderBy: { dia_semana: 'desc' }
         });
 
         if (!escala) {
@@ -25,9 +26,9 @@ export class PrismaFuncionarioEscalaRepository implements FuncionarioEscalaRepos
         return result.count;
     }
 
-    async adicionarEscala(escala: FuncionarioEscala): Promise<FuncionarioEscala> {
+    async adicionarEscala(escala: CriarFuncionarioEscalaInputDTO): Promise<FuncionarioEscala> {
         const novaEscala = await prisma.funcionarioEscala.create({
-            data: escala
+            data: escala,
         });
 
         return novaEscala;

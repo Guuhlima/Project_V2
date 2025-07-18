@@ -63,7 +63,7 @@ model Funcionario {
   versao                         String
   escalas                        FuncionarioEscala[]
 
-  @@map("Funcionario")
+  @@map("funcionario")
   @@schema("winover")
 }
 
@@ -98,7 +98,7 @@ model Pausas {
 }
 
 model FuncionarioEscala {
-  id_funcionario Int         @id
+  id_funcionario Int
   funcionario    Funcionario @relation(fields: [id_funcionario], references: [id])
   dia_semana     Int
   tipo_escala    Int
@@ -111,6 +111,7 @@ model FuncionarioEscala {
   fim_pausa2     String
   fim_expediente String
 
-  @@map("FuncionarioEscala")
+  @@id([id_funcionario, dia_semana])
+  @@map("funcionario_escala")
   @@schema("winover")
 }

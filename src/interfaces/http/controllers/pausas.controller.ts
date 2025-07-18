@@ -8,8 +8,12 @@ export class PausasController{
     ) {}
 
     async listarPausasPorId(request: FastifyRequest<{ Params: PausasParams }>, reply: FastifyReply) {
-        const { id } = request.params as any;
-        const result = await this.listarPausas.execute({ id })
-        return reply.send(result)
+        try {
+            const { id } = request.params as any;
+            const result = await this.listarPausas.execute({ id })
+            return reply.send(result)
+        } catch (error) {
+            return reply.status(500).send({ message: "Erro ao listar pausas", error});
+        }
     }
 }
