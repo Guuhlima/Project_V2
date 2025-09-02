@@ -1,6 +1,6 @@
 import { FastifyInstance } from "fastify";
 import { PausasParamsSchema } from "../../shared/schemas/pausasSchemas";
-import { PausasController } from "../http/controllers/pausas.controller";    
+import { PausasController } from "../http/controllers/pausasController/pausas.controller";    
 import { ListarPausasUseCase } from "../../application/use-cases/pausas/listarPausas.usecase";
 import { PrismaPausasRepository } from "../../infrastructure/repositories/prismaPausasRepository";
 

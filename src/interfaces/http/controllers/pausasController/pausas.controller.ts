@@ -1,6 +1,6 @@
 import { FastifyRequest, FastifyReply } from "fastify";
-import { ListarPausasUseCase } from "../../../application/use-cases/pausas/listarPausas.usecase";
-import { PausasParams } from "../../../shared/schemas/pausasSchemas";
+import { ListarPausasUseCase } from "../../../../application/use-cases/pausas/listarPausas.usecase";
+import { PausasParams } from "../../../../shared/schemas/pausasSchemas";
 
 export class PausasController{
     constructor(
